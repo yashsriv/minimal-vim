@@ -4,9 +4,12 @@ endif
 
 " Install VimPlug if not present
 if empty(glob('~/.vim/autoload/plug.vim'))
-    !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall
+  !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
+" Install Harlequin theme
+if empty(glob('~/.vim/colors/harlequin.vim'))
+  !curl -fLo ~/.vim/colors/harlequin.vim --create-dirs https://raw.githubusercontent.com/nielsmadan/harlequin/master/colors/harlequin.vim
 endif
 
 " Plugins!!
@@ -27,6 +30,8 @@ if !has('nvim')
   set t_Co=256
 endif
 
+colorscheme harlequin
+
 set number                      " Show line number
 set relativenumber              " Show relative line number
 set showcmd                     " Show current command
@@ -34,14 +39,14 @@ set showmode                    " Show current mode
 set wildmode=longest:list,full  " Autocomplete
 set wildignore=*.o,*.obj,*~     " Ignore file
 set showmatch                   " highlight matching braces
-" set autoindent                  " In vim-sensible
-" set backspace=indent,eol,start  " In vim-sensible
-" set smarttab                    " In vim-sensible
-" set incsearch                   " In vim-sensible
-" set laststatus=2                " In vim-sensible
-" set ruler                       " In vim-sensible
-" set wildmenu                    " In vim-sensible
-" set expandtab                   " In vim-sleuth
+"set autoindent                  " In vim-sensible
+"set backspace=indent,eol,start  " In vim-sensible
+"set smarttab                    " In vim-sensible
+"set incsearch                   " In vim-sensible
+"set laststatus=2                " In vim-sensible
+"set ruler                       " In vim-sensible
+"set wildmenu                    " In vim-sensible
+"set expandtab                   " In vim-sleuth
 set hlsearch                    " Highlight search
 set ignorecase                  " ignore case while searching
 set smartcase                   " unless uppercase explicitly mentioned
