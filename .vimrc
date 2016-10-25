@@ -127,3 +127,8 @@ set statusline+=%*
 
 set statusline+=%=
 set statusline+=%-14.(%c%V\ ,\ %l/%L%)\ %P
+
+" Plugin Settings
+
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : <sid>"\<Tab>"
+inoremap <silent> <CR> <C-r>=<SID>pumvisible() ? "\<C-y>" : "\<CR>"<CR>
