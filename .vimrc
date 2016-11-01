@@ -21,8 +21,9 @@ Plug 'scrooloose/nerdcommenter'         " Awesome Commenting
 Plug 'bronson/vim-trailing-whitespace'  " Display trailing whitespace
 Plug 'auto-pairs-gentle'                " Add brackets automatically
 Plug 'autoswap.vim'                     " Handle swap files intelligently
-Plug 'AutoComplPop'                     " Auto Complete Popup
+"Plug 'AutoComplPop'                     " Auto Complete Popup
 Plug 'sheerun/vim-polyglot'             " Mega language support pack
+Plug 'ervandew/supertab'                " Autocomplete
 
 call plug#end()
 
@@ -130,5 +131,5 @@ set statusline+=%-14.(%c%V\ ,\ %l/%L%)\ %P
 
 " Plugin Settings
 
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : <sid>"\<Tab>"
-inoremap <silent> <CR> <C-r>=<SID>pumvisible() ? "\<C-y>" : "\<CR>"<CR>
+"inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : <sid>"\<Tab>"
+"inoremap <silent> <CR> <C-r>=<SID>pumvisible() ? "\<C-y>" : "\<CR>"<CR>
