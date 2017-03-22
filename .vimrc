@@ -90,6 +90,8 @@ vmap // <leader>cs
 " Move lines up(-) or down(_)
 noremap - ddp
 noremap _ ddkP
+" Write file as sudo
+cnoremap w!! w !sudo tee > /dev/null %
 
 " Display Filename
 set statusline=%<%#identifier#
