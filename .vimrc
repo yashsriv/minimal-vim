@@ -19,8 +19,8 @@ Plug 'tpope/vim-sensible'               " Some sensible settings
 Plug 'tpope/vim-sleuth'                 " Autodetect file spacing
 Plug 'scrooloose/nerdcommenter'         " Awesome Commenting
 Plug 'bronson/vim-trailing-whitespace'  " Display trailing whitespace
-Plug 'auto-pairs-gentle'                " Add brackets automatically
-Plug 'autoswap.vim'                     " Handle swap files intelligently
+Plug 'vim-scripts/auto-pairs-gentle'    " Add brackets automatically
+Plug 'vim-scripts/autoswap.vim'         " Handle swap files intelligently
 "Plug 'AutoComplPop'                     " Auto Complete Popup
 Plug 'sheerun/vim-polyglot'             " Mega language support pack
 Plug 'ervandew/supertab'                " Autocomplete
