@@ -21,11 +21,48 @@ Plug 'scrooloose/nerdcommenter'         " Awesome Commenting
 Plug 'bronson/vim-trailing-whitespace'  " Display trailing whitespace
 Plug 'vim-scripts/auto-pairs-gentle'    " Add brackets automatically
 Plug 'vim-scripts/autoswap.vim'         " Handle swap files intelligently
-"Plug 'AutoComplPop'                     " Auto Complete Popup
+Plug 'vim-scripts/ebnf.vim'             " Handle swap files intelligently
+"Plug 'vim-scripts/AutoComplPop'         " Auto Complete Popup
 Plug 'sheerun/vim-polyglot'             " Mega language support pack
-Plug 'ervandew/supertab'                " Autocomplete
+"Plug 'ervandew/supertab'                " Autocomplete
+
+Plug 'fatih/vim-go'                     " Golang!!
+
+" Autocompletion ultra powerful
+if has('nvim')
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2'
+else
+  Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'roxma/nvim-yarp'
+  Plug 'ncm2/ncm2'
+endif
+
+" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
+Plug 'ncm2/ncm2-cssomni'
+Plug 'ncm2/ncm2-pyclang'
 
 call plug#end()
+
+" Autocompletion Settings
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set shortmess+=c
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+au User Ncm2Plugin call ncm2#register_source({
+            \ 'name' : 'css',
+            \ 'priority': 9,
+            \ 'subscope_enable': 1,
+            \ 'scope': ['css','scss'],
+            \ 'mark': 'css',
+            \ 'word_pattern': '[\w\-]+',
+            \ 'complete_pattern': ':\s*',
+            \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+            \ })
 
 if !has('nvim')
   set t_Co=256
@@ -33,6 +70,7 @@ endif
 
 colorscheme harlequin
 
+set completeopt+=noinsert,menuone,noselect
 set number                      " Show line number
 set relativenumber              " Show relative line number
 set showcmd                     " Show current command
