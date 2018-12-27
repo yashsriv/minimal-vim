@@ -1,6 +1,8 @@
 if !has('nvim')
   set nocompatible                    " be iMproved, required
 endif
+set encoding=utf-8
+scriptencoding utf-8
 
 " Install VimPlug if not present
 if empty(glob('~/.vim/autoload/plug.vim'))
