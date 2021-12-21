@@ -23,48 +23,29 @@ Plug 'scrooloose/nerdcommenter'         " Awesome Commenting
 Plug 'bronson/vim-trailing-whitespace'  " Display trailing whitespace
 Plug 'vim-scripts/auto-pairs-gentle'    " Add brackets automatically
 Plug 'vim-scripts/autoswap.vim'         " Handle swap files intelligently
-Plug 'vim-scripts/ebnf.vim'             " Handle swap files intelligently
-"Plug 'vim-scripts/AutoComplPop'         " Auto Complete Popup
 Plug 'sheerun/vim-polyglot'             " Mega language support pack
-"Plug 'ervandew/supertab'                " Autocomplete
 
-Plug 'fatih/vim-go'                     " Golang!!
+" LSP support for vim
+Plug 'prabirshrestha/vim-lsp'           " Adds support for lsp to vim
+Plug 'mattn/vim-lsp-settings'           " Adds support for auto-installing Language Servers
 
-" Autocompletion ultra powerful
-if has('nvim')
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-else
-  Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'roxma/nvim-yarp'
-  Plug 'ncm2/ncm2'
-endif
+" Syntax and error checking
+Plug 'dense-analysis/ale'               " ALE is the engine surfacing errors
+Plug 'rhysd/vim-lsp-ale'                " It uses vim lsp as a source for the errors
 
-" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-syntax' | Plug 'Shougo/neco-syntax'
-Plug 'ncm2/ncm2-cssomni'
-Plug 'ncm2/ncm2-pyclang'
+" Plugin for displaying the autocomplete popup
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim' " Autocomplete from expressions in buffer
+Plug 'prabirshrestha/asyncomplete-file.vim'   " Autocomplete files
+Plug 'prabirshrestha/asyncomplete-lsp.vim'    " Autocomplete by querying lsp
 
 call plug#end()
 
-" Autocompletion Settings
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set shortmess+=c
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" Autocomplete popup
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-au User Ncm2Plugin call ncm2#register_source({
-            \ 'name' : 'css',
-            \ 'priority': 9,
-            \ 'subscope_enable': 1,
-            \ 'scope': ['css','scss'],
-            \ 'mark': 'css',
-            \ 'word_pattern': '[\w\-]+',
-            \ 'complete_pattern': ':\s*',
-            \ 'on_complete': ['ncm2#on_complete#delay', 180, 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
-            \ })
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 
 if !has('nvim')
   set t_Co=256
@@ -118,6 +99,7 @@ autocmd! BufReadPost * call SetCursorPosition()
 autocmd! filetype svn,*commit*,markdown setlocal spell         " Spell Check
 autocmd! filetype svn,*commit*,markdown setlocal textwidth=72  " Looks good
 autocmd! filetype make setlocal noexpandtab                    " In Makefiles DO NOT use spaces instead of tabs
+let g:rustfmt_autosave = 1
 
 set ff=unix
 
