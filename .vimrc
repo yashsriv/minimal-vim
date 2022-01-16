@@ -99,7 +99,6 @@ autocmd! BufReadPost * call SetCursorPosition()
 autocmd! filetype svn,*commit*,markdown setlocal spell         " Spell Check
 autocmd! filetype svn,*commit*,markdown setlocal textwidth=72  " Looks good
 autocmd! filetype make setlocal noexpandtab                    " In Makefiles DO NOT use spaces instead of tabs
-let g:rustfmt_autosave = 1
 
 set ff=unix
 
@@ -157,3 +156,32 @@ set statusline+=%-14.(%c%V\ ,\ %l/%L%)\ %P
 
 "inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : <sid>"\<Tab>"
 "inoremap <silent> <CR> <C-r>=<SID>pumvisible() ? "\<C-y>" : "\<CR>"<CR>
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'allowlist': ['*'],
+      \ 'priority': 10,
+      \ 'completor': function('asyncomplete#sources#file#completor')
+      \ }))
+
+au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'allowlist': ['*'],
+    \ 'blocklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ 'config': {
+    \    'max_buffer_size': 5000000,
+    \  },
+    \ }))
+
+" ALE Settings
+
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+      \ 'javascript': ['prettier'],
+      \ 'typescript': ['prettier'],
+      \ 'typescriptreact': ['prettier'],
+      \ 'css': ['prettier'],
+      \}
+
+let g:rustfmt_autosave = 1
