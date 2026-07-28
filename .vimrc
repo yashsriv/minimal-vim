@@ -99,6 +99,7 @@ autocmd! BufReadPost * call SetCursorPosition()
 autocmd! filetype svn,*commit*,markdown setlocal spell         " Spell Check
 autocmd! filetype svn,*commit*,markdown setlocal textwidth=72  " Looks good
 autocmd! filetype make setlocal noexpandtab                    " In Makefiles DO NOT use spaces instead of tabs
+au BufRead,BufNewFile *.mm set filetype=objc
 
 set ff=unix
 
